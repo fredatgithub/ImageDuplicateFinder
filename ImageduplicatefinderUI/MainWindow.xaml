@@ -43,7 +43,6 @@
                   <TextBlock Text="{Binding FileName}" FontWeight="Bold"/>
                   <TextBlock Text="{Binding FilePath}"/>
                   <TextBlock Text="{Binding FileSize, StringFormat='{}Taille: {0:N0} octets'}"/>
-                  <TextBlock Text="{Binding FileSize, StringFormat='{}Taille: {0:N0} octets'}"/>
                     <TextBlock Text="{Binding LastWriteTime, StringFormat='{}Modifié le : {0:dd/MM/yyyy HH:mm}'}"/>
                   <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <Button Content="Ouvrir" Margin="0,0,5,0" Click="BtnOpenImage_Click" 
