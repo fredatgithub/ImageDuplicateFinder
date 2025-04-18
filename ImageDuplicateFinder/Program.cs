@@ -9,7 +9,7 @@ namespace ImageDuplicateFinder
   {
     static void Main()
     {
-      Action<string> Display = Display;
+      Action<string> Display = Console.WriteLine;
       const string folderPath = "F:\\repos\\SaveWindows10WallPaper\\SaveWindows10WallPaper\\images";
       Display($"Recherche des images en double dans le dossier : {folderPath}");
       if (!Directory.Exists(folderPath))
