@@ -6,55 +6,55 @@
         xmlns:local="clr-namespace:ImageduplicatefinderUI"
         mc:Ignorable="d"
         Title="Recherche d'images en doublon" Height="600" Width="1000">
-    <DockPanel LastChildFill="True" Margin="10">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
-            <TextBox x:Name="txtDirectory" Width="400" Margin="0,0,10,0" IsReadOnly="True"/>
-            <Button x:Name="btnSelectDirectory" Content="Sélectionner un répertoire" Width="150" Click="BtnSelectDirectory_Click"/>
-            <Button x:Name="btnSearch" Content="Rechercher" Width="100" Margin="10,0,0,0" Click="BtnSearch_Click"/>
-        </StackPanel>
-        
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+  <DockPanel LastChildFill="True" Margin="10">
+    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+      <TextBox x:Name="txtDirectory" Width="400" Margin="0,0,10,0" IsReadOnly="True"/>
+      <Button x:Name="btnSelectDirectory" Content="Sélectionner un répertoire" Width="150" Click="BtnSelectDirectory_Click"/>
+      <Button x:Name="btnSearch" Content="Rechercher" Width="100" Margin="10,0,0,0" Click="BtnSearch_Click"/>
+    </StackPanel>
 
-            <!-- Liste des groupes d'images en double -->
-            <ListBox x:Name="lstDuplicateGroups" Grid.Column="0" Margin="0,0,10,0" 
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="250"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- Liste des groupes d'images en double -->
+      <ListBox x:Name="lstDuplicateGroups" Grid.Column="0" Margin="0,0,10,0" 
                      SelectionChanged="LstDuplicateGroups_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding GroupName}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding FileCount, StringFormat='{}Nombre de fichiers: {0}'}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel>
+              <TextBlock Text="{Binding GroupName}" FontWeight="Bold"/>
+              <TextBlock Text="{Binding FileCount, StringFormat='{}Nombre de fichiers: {0}'}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
 
-            <!-- Visualisation des images du groupe sélectionné -->
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="imgDuplicates">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,10" Padding="5">
-                                <StackPanel>
-                                    <Image Source="{Binding FilePath}" Height="200" Stretch="Uniform" Margin="0,0,0,5"/>
-                                    <TextBlock Text="{Binding FileName}" FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding FilePath}"/>
-                                    <TextBlock Text="{Binding FileSize, StringFormat='{}Taille: {0:N0} octets'}"/>
-                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                        <Button Content="Ouvrir" Margin="0,0,5,0" Click="BtnOpenImage_Click" 
+      <!-- Visualisation des images du groupe sélectionné -->
+      <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+        <ItemsControl x:Name="imgDuplicates">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Border BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,10" Padding="5">
+                <StackPanel>
+                  <Image Source="{Binding ImageSource}" Height="200" Stretch="Uniform" Margin="0,0,0,5"/>
+                  <TextBlock Text="{Binding FileName}" FontWeight="Bold"/>
+                  <TextBlock Text="{Binding FilePath}"/>
+                  <TextBlock Text="{Binding FileSize, StringFormat='{}Taille: {0:N0} octets'}"/>
+                  <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Button Content="Ouvrir" Margin="0,0,5,0" Click="BtnOpenImage_Click" 
                                                 CommandParameter="{Binding FilePath}"/>
-                                        <Button Content="Supprimer" Click="BtnDeleteImage_Click"
+                    <Button Content="Supprimer" Click="BtnDeleteImage_Click"
                                                 CommandParameter="{Binding FilePath}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
-    </DockPanel>
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+    </Grid>
+  </DockPanel>
 </Window>
