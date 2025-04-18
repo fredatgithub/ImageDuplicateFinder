@@ -1,6 +1,6 @@
 ﻿namespace ImageduplicatefinderUI
 {
-public partial class MainWindow
+  public partial class MainWindow
   {
     public class DuplicateImage
     {
@@ -8,6 +8,5 @@ public partial class MainWindow
       public string FileName { get; set; }
       public bool IsSelectedForDeletion { get; set; }
     }
-
   }
 }
