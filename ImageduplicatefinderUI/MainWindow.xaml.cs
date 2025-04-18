@@ -1,12 +1,12 @@
 ﻿using ImageduplicatefinderLib;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace ImageduplicatefinderUI
@@ -27,7 +27,7 @@ namespace ImageduplicatefinderUI
 
     private void BtnSelectDirectory_Click(object sender, RoutedEventArgs e)
     {
-      var dialog = new System.Windows.Forms.FolderBrowserDialog();
+      var dialog = new FolderBrowserDialog();
       if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
       {
         _selectedDirectory = dialog.SelectedPath;
@@ -98,9 +98,9 @@ namespace ImageduplicatefinderUI
         {
           Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-          MessageBox.Show($"Impossible d'ouvrir l'image : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+          MessageBox.Show($"Impossible d'ouvrir l'image : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
         }
       }
     }
@@ -122,9 +122,9 @@ namespace ImageduplicatefinderUI
             File.Delete(filePath);
             RefreshCurrentGroup();
           }
-          catch (Exception ex)
+          catch (Exception exception)
           {
-            MessageBox.Show($"Impossible de supprimer le fichier : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"Impossible de supprimer le fichier : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
           }
         }
       }
