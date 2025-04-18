@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
-using ImageduplicatefinderUI;
 
 namespace ImageduplicatefinderUI
 {
@@ -113,54 +112,54 @@ namespace ImageduplicatefinderUI
     }
 
     private void BtnDeleteImage_Click(object sender, RoutedEventArgs e)
-{
-    if (sender is System.Windows.Controls.Button button && button.CommandParameter is string filePath)
     {
+      if (sender is System.Windows.Controls.Button button && button.CommandParameter is string filePath)
+      {
         // Recherche du groupe sélectionné
         if (lstDuplicateGroups.SelectedItem is DuplicateGroup group)
         {
-            // Recherche de l'image à supprimer
-            var imageToDelete = group.Images.FirstOrDefault(img => img.FilePath == filePath);
-            if (imageToDelete != null)
+          // Recherche de l'image à supprimer
+          var imageToDelete = group.Images.FirstOrDefault(img => img.FilePath == filePath);
+          if (imageToDelete != null)
+          {
+            // Suppression du fichier physique
+            try
             {
-                // Suppression du fichier physique
-                try
-                {
-                    File.Delete(filePath);
-                }
-                catch (Exception ex)
-                {
-                    System.Windows.MessageBox.Show($"Erreur lors de la suppression du fichier : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                // Suppression de l'image dans la liste du groupe
-                group.Images.Remove(imageToDelete);
-                group.FileCount = group.Images.Count;
-
-                // Rafraîchir l'affichage
-                imgDuplicates.ItemsSource = null;
-                imgDuplicates.ItemsSource = group.Images;
-
-                // Si le groupe n'a plus qu'une seule image, sélectionner le groupe suivant
-                if (group.Images.Count == 1)
-                {
-                    int currentIndex = _duplicateGroups.IndexOf(group);
-                    int nextIndex = currentIndex + 1;
-                    if (nextIndex < _duplicateGroups.Count)
-                    {
-                        lstDuplicateGroups.SelectedIndex = nextIndex;
-                    }
-                    else if (_duplicateGroups.Count > 1)
-                    {
-                        // Si c'était le dernier groupe, sélectionner le précédent
-                        lstDuplicateGroups.SelectedIndex = currentIndex - 1;
-                    }
-                }
+              File.Delete(filePath);
             }
+            catch (Exception ex)
+            {
+              System.Windows.MessageBox.Show($"Erreur lors de la suppression du fichier : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+              return;
+            }
+
+            // Suppression de l'image dans la liste du groupe
+            group.Images.Remove(imageToDelete);
+            group.FileCount = group.Images.Count;
+
+            // Rafraîchir l'affichage
+            imgDuplicates.ItemsSource = null;
+            imgDuplicates.ItemsSource = group.Images;
+
+            // Si le groupe n'a plus qu'une seule image, on supprime le groupe
+            if (group.Images.Count == 1)
+            {
+              int currentIndex = _duplicateGroups.IndexOf(group);
+              _duplicateGroups.Remove(group);
+
+              // Sélectionner le groupe suivant si possible, sinon le précédent
+              if (_duplicateGroups.Count > 0)
+              {
+                if (currentIndex < _duplicateGroups.Count)
+                  lstDuplicateGroups.SelectedIndex = currentIndex;
+                else
+                  lstDuplicateGroups.SelectedIndex = _duplicateGroups.Count - 1;
+              }
+            }
+          }
         }
+      }
     }
-}
     private void RefreshCurrentGroup()
     {
       if (lstDuplicateGroups.SelectedItem is DuplicateGroup group)
