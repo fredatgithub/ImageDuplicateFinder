@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using ImageduplicatefinderUI;
 
 namespace ImageduplicatefinderUI
 {
@@ -67,12 +68,13 @@ namespace ImageduplicatefinderUI
           {
             GroupName = $"Groupe {_duplicateGroups.Count + 1}",
             FileCount = group.Count(),
-            Images = group.Select(f => new ImageInfo
-            {
-              FilePath = f,
-              FileName = Path.GetFileName(f),
-              FileSize = new FileInfo(f).Length
-            }).ToList()
+            // Images = group.Select(f => new ImageInfo
+            // {
+            //   FilePath = f,
+            //   FileName = Path.GetFileName(f),
+            //   FileSize = new FileInfo(f).Length
+            // }).ToList()
+            Images = group.Select(f => new ImageInfo(f)).ToList()
           });
         }
 

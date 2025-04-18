@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace ImageduplicatefinderUI
@@ -9,25 +10,37 @@ namespace ImageduplicatefinderUI
     public string FileName { get; set; }
     public long FileSize { get; set; }
 
-    public BitmapImage ImageSource
+    private BitmapImage _imageSource;
+    public BitmapImage ImageSource => _imageSource;
+
+    public ImageInfo()
     {
-      get
+    }
+
+    public ImageInfo(string filePath)
+    {
+      FilePath = filePath;
+      FileName = Path.GetFileName(filePath);
+      FileSize = new FileInfo(filePath).Length;
+      _imageSource = LoadImage(filePath);
+    }
+
+    private BitmapImage LoadImage(string filePath)
+    {
+      try
       {
-        try
-        {
-          var bitmap = new BitmapImage();
-          bitmap.BeginInit();
-          bitmap.UriSource = new Uri(FilePath, UriKind.Absolute);
-          bitmap.CacheOption = BitmapCacheOption.OnLoad; // charge en mémoire, ne verrouille plus le fichier
-          bitmap.EndInit();
-          bitmap.Freeze();
-          return bitmap;
-        }
-        catch (Exception exception)
-        {
-          System.Diagnostics.Debug.WriteLine($"Erreur chargement image {FilePath} : {exception.Message}");
-          return null;
-        }
+        var bitmap = new BitmapImage();
+        bitmap.BeginInit();
+        bitmap.UriSource = new Uri(filePath, UriKind.Absolute);
+        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+        bitmap.EndInit();
+        bitmap.Freeze();
+        return bitmap;
+      }
+      catch (Exception ex)
+      {
+        System.Diagnostics.Debug.WriteLine($"Erreur chargement image {filePath} : {ex.Message}");
+        return null;
       }
     }
   }
