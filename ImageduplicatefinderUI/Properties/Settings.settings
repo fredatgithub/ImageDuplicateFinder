@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="LastDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F:\repos\SaveWindows10WallPaper\SaveWindows10WallPaper\images</Value>
+      <Value Profile="(Default)">C:\images</Value>
     </Setting>
     <Setting Name="MainWindowTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">100</Value>
