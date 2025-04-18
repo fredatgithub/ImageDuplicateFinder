@@ -10,6 +10,7 @@ namespace ImageduplicatefinderUI
     public string FileName { get; set; }
     public long FileSize { get; set; }
     public DateTime LastWriteTime { get; set; }
+    public DateTime CreationTime { get; set; }
 
     private BitmapImage _imageSource;
     public BitmapImage ImageSource => _imageSource;
@@ -25,6 +26,7 @@ namespace ImageduplicatefinderUI
       FileSize = new FileInfo(filePath).Length;
       var info = new FileInfo(filePath);
       LastWriteTime = info.LastWriteTime;
+      CreationTime = info.CreationTime;
       _imageSource = LoadImage(filePath);
     }
 
