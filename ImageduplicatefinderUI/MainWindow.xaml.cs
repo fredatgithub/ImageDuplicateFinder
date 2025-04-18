@@ -46,6 +46,12 @@ namespace ImageduplicatefinderUI
         return;
       }
 
+      PleaseWaitWindow pleaseWait = new PleaseWaitWindow
+      {
+        Owner = this
+      };
+      pleaseWait.Show();
+
       try
       {
         Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
@@ -82,6 +88,7 @@ namespace ImageduplicatefinderUI
       {
         Mouse.OverrideCursor = null;
         btnSearch.IsEnabled = true;
+        pleaseWait.Close();
       }
     }
 
