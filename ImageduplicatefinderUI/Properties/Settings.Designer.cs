@@ -25,18 +25,6 @@ namespace ImageduplicatefinderUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F:\\repos\\SaveWindows10WallPaper\\SaveWindows10WallPaper\\images")]
-        public string LastDirectory {
-            get {
-                return ((string)(this["LastDirectory"]));
-            }
-            set {
-                this["LastDirectory"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public double MainWindowTop {
             get {
@@ -92,6 +80,18 @@ namespace ImageduplicatefinderUI.Properties {
             }
             set {
                 this["MainWindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\user1\\OneDrive\\Images")]
+        public string LastDirectory {
+            get {
+                return ((string)(this["LastDirectory"]));
+            }
+            set {
+                this["LastDirectory"] = value;
             }
         }
     }
