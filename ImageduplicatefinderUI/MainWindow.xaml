@@ -17,6 +17,7 @@
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="250"/>
+        <ColumnDefinition Width="5"/> <!-- Largeur du splitter -->
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
@@ -33,8 +34,17 @@
         </ListBox.ItemTemplate>
       </ListBox>
 
+       <!-- Barre déplaçable -->
+  <GridSplitter Grid.Column="1"
+                Width="5"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Gray"
+                ShowsPreview="True"/>
+
+
       <!-- Visualisation des images du groupe sélectionné -->
-      <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+      <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
         <ItemsControl x:Name="imgDuplicates">
           <ItemsControl.ItemTemplate>
             <DataTemplate>
