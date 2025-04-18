@@ -46,10 +46,16 @@
                   <TextBlock Text="{Binding CreationTime, StringFormat='{}Créé le : {0:dd/MM/yyyy HH:mm}'}"/>
                   <TextBlock Text="{Binding LastWriteTime, StringFormat='{}Modifié le : {0:dd/MM/yyyy HH:mm}'}"/>
                   <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                    <Button Content="Ouvrir" Margin="0,0,5,0" Click="BtnOpenImage_Click" 
-                                                CommandParameter="{Binding FilePath}"/>
-                    <Button Content="Supprimer" Click="BtnDeleteImage_Click"
-                                                CommandParameter="{Binding FilePath}"/>
+                    <Button Content="Ouvrir"
+                            Margin="0,0,5,0" Click="BtnOpenImage_Click"
+                            CommandParameter="{Binding FilePath}"
+                            Background="LightGreen"
+                            Foreground="Black"/>
+                    <Button Content="Supprimer"
+                            Click="BtnDeleteImage_Click"
+                            CommandParameter="{Binding FilePath}"
+                            Background="Tomato"
+                            Foreground="White"/>
                   </StackPanel>
                 </StackPanel>
               </Border>
