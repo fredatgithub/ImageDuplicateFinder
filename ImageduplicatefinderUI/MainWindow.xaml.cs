@@ -26,7 +26,28 @@ namespace ImageduplicatefinderUI
       // Charger le dernier chemin utilisé
       _selectedDirectory = Properties.Settings.Default.LastDirectory;
       txtDirectory.Text = _selectedDirectory;
+
+      // Charger la taille et la position de la fenêtre
+if (Properties.Settings.Default.MainWindowWidth > 0)
+    this.Width = Properties.Settings.Default.MainWindowWidth;
+if (Properties.Settings.Default.MainWindowHeight > 0)
+    this.Height = Properties.Settings.Default.MainWindowHeight;
+if (Properties.Settings.Default.MainWindowTop >= 0)
+    this.Top = Properties.Settings.Default.MainWindowTop;
+if (Properties.Settings.Default.MainWindowLeft >= 0)
+    this.Left = Properties.Settings.Default.MainWindowLeft;
+
+    this.Closing += MainWindow_Closing;
     }
+
+    private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+{
+    Properties.Settings.Default.MainWindowWidth = this.Width;
+    Properties.Settings.Default.MainWindowHeight = this.Height;
+    Properties.Settings.Default.MainWindowTop = this.Top;
+    Properties.Settings.Default.MainWindowLeft = this.Left;
+    Properties.Settings.Default.Save();
+}
 
     private void BtnSelectDirectory_Click(object sender, RoutedEventArgs e)
     {
