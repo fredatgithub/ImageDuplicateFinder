@@ -71,9 +71,9 @@ namespace ImageduplicatefinderUI
           MessageBox.Show("Aucune image en double n'a été trouvée.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
       }
-      catch (Exception ex)
+      catch (Exception exception)
       {
-        MessageBox.Show($"Une erreur s'est produite : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show($"Une erreur s'est produite : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
       }
       finally
       {
@@ -151,19 +151,5 @@ namespace ImageduplicatefinderUI
         }
       }
     }
-  }
-
-  public class DuplicateGroup
-  {
-    public string GroupName { get; set; }
-    public int FileCount { get; set; }
-    public List<ImageInfo> Images { get; set; } = new List<ImageInfo>();
-  }
-
-  public class ImageInfo
-  {
-    public string FilePath { get; set; }
-    public string FileName { get; set; }
-    public long FileSize { get; set; }
   }
 }
