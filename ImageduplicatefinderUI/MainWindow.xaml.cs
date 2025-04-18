@@ -50,6 +50,7 @@ namespace ImageduplicatefinderUI
       {
         Owner = this
       };
+
       pleaseWait.Show();
 
       try

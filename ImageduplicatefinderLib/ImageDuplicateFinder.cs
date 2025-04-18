@@ -19,12 +19,12 @@ namespace ImageduplicatefinderLib
     /// Parcourt récursivement le dossier, calcule le hash MD5 de chaque image supportée,
     /// et retourne les groupes de fichiers identiques (>= 2).
     /// </summary>
-    public async Task<List<List<string>>> FindDuplicatesAsync(
-        string directory,
-        IEnumerable<string> extensions = null)
+    public async Task<List<List<string>>> FindDuplicatesAsync(string directory, IEnumerable<string> extensions = null)
     {
       if (string.IsNullOrWhiteSpace(directory) || !Directory.Exists(directory))
+      {
         throw new DirectoryNotFoundException($"Le répertoire '{directory}' n'existe pas.");
+      }
 
       var exts = extensions != null
           ? new HashSet<string>(extensions, StringComparer.OrdinalIgnoreCase)
