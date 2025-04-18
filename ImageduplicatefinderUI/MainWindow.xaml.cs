@@ -68,12 +68,6 @@ namespace ImageduplicatefinderUI
           {
             GroupName = $"Groupe {_duplicateGroups.Count + 1}",
             FileCount = group.Count(),
-            // Images = group.Select(f => new ImageInfo
-            // {
-            //   FilePath = f,
-            //   FileName = Path.GetFileName(f),
-            //   FileSize = new FileInfo(f).Length
-            // }).ToList()
             Images = group.Select(f => new ImageInfo(f)).ToList()
           });
         }
