@@ -23,6 +23,9 @@ namespace ImageduplicatefinderUI
       _imageDuplicateFinder = new ImageDuplicateFinder();
       _duplicateGroups = new ObservableCollection<DuplicateGroup>();
       lstDuplicateGroups.ItemsSource = _duplicateGroups;
+      // Charger le dernier chemin utilisé
+      _selectedDirectory = Properties.Settings.Default.LastDirectory;
+      txtDirectory.Text = _selectedDirectory;
     }
 
     private void BtnSelectDirectory_Click(object sender, RoutedEventArgs e)
@@ -39,13 +42,13 @@ namespace ImageduplicatefinderUI
     {
       if (string.IsNullOrEmpty(_selectedDirectory))
       {
-        MessageBox.Show("Veuillez sélectionner un répertoire", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        System.Windows.MessageBox.Show("Veuillez sélectionner un répertoire", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
 
       try
       {
-        Mouse.OverrideCursor = Cursors.Wait;
+        Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
         btnSearch.IsEnabled = false;
 
         _duplicateGroups.Clear();
@@ -68,12 +71,12 @@ namespace ImageduplicatefinderUI
 
         if (_duplicateGroups.Count == 0)
         {
-          MessageBox.Show("Aucune image en double n'a été trouvée.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+          System.Windows.MessageBox.Show("Aucune image en double n'a été trouvée.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
       }
       catch (Exception exception)
       {
-        MessageBox.Show($"Une erreur s'est produite : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        System.Windows.MessageBox.Show($"Une erreur s'est produite : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
       }
       finally
       {
@@ -92,7 +95,7 @@ namespace ImageduplicatefinderUI
 
     private void BtnOpenImage_Click(object sender, RoutedEventArgs e)
     {
-      if (sender is Button button && button.CommandParameter is string filePath)
+      if (sender is System.Windows.Controls.Button button && button.CommandParameter is string filePath)
       {
         try
         {
@@ -100,16 +103,16 @@ namespace ImageduplicatefinderUI
         }
         catch (Exception exception)
         {
-          MessageBox.Show($"Impossible d'ouvrir l'image : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+          System.Windows.MessageBox.Show($"Impossible d'ouvrir l'image : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
         }
       }
     }
 
     private void BtnDeleteImage_Click(object sender, RoutedEventArgs e)
     {
-      if (sender is Button button && button.CommandParameter is string filePath)
+      if (sender is System.Windows.Controls.Button button && button.CommandParameter is string filePath)
       {
-        var result = MessageBox.Show(
+        var result = System.Windows.MessageBox.Show(
             $"Êtes-vous sûr de vouloir supprimer le fichier ?\n{filePath}",
             "Confirmation",
             MessageBoxButton.YesNo,
@@ -124,7 +127,7 @@ namespace ImageduplicatefinderUI
           }
           catch (Exception exception)
           {
-            MessageBox.Show($"Impossible de supprimer le fichier : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"Impossible de supprimer le fichier : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
           }
         }
       }
@@ -150,6 +153,13 @@ namespace ImageduplicatefinderUI
           imgDuplicates.ItemsSource = group.Images;
         }
       }
+    }
+
+    protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+    {
+      Properties.Settings.Default.LastDirectory = _selectedDirectory;
+      Properties.Settings.Default.Save();
+      base.OnClosing(e);
     }
   }
 }

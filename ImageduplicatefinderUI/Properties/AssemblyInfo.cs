@@ -8,11 +8,11 @@ using System.Windows;
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("ImageduplicatefinderUI")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Search and delete duplicate pictures in a folder")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ImageduplicatefinderUI")]
-[assembly: AssemblyCopyright("Copyright ©  2025")]
+[assembly: AssemblyCopyright("Copyright ©  MIT Freddy Juhel 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
