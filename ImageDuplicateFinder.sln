@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageDuplicateFinder", "ImageDuplicateFinder\ImageDuplicateFinder.csproj", "{BAEC7AF9-5C8E-461E-BBED-F7DF1FC74F22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageDuplicateFinder2", "ImageDuplicateFinder2\ImageDuplicateFinder2.csproj", "{5CB77D4B-A391-4BAF-9480-CFF61FAC9B76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageduplicatefinderUI", "ImageduplicatefinderUI\ImageduplicatefinderUI.csproj", "{6C0C35EA-B216-4120-8A90-9CBB1E331737}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{5CB77D4B-A391-4BAF-9480-CFF61FAC9B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CB77D4B-A391-4BAF-9480-CFF61FAC9B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CB77D4B-A391-4BAF-9480-CFF61FAC9B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C0C35EA-B216-4120-8A90-9CBB1E331737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0C35EA-B216-4120-8A90-9CBB1E331737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0C35EA-B216-4120-8A90-9CBB1E331737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0C35EA-B216-4120-8A90-9CBB1E331737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
