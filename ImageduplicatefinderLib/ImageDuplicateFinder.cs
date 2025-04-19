@@ -59,6 +59,7 @@ namespace ImageduplicatefinderLib
                   list = new List<string>();
                   hashToFiles[hash] = list;
                 }
+
                 list.Add(file);
               }
             }

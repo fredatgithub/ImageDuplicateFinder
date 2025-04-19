@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Imaging;
 
@@ -42,9 +43,9 @@ namespace ImageduplicatefinderUI
         bitmap.Freeze();
         return bitmap;
       }
-      catch (Exception ex)
+      catch (Exception exception)
       {
-        System.Diagnostics.Debug.WriteLine($"Erreur chargement image {filePath} : {ex.Message}");
+        Debug.WriteLine($"Erreur chargement image {filePath} : {exception.Message}");
         return null;
       }
     }

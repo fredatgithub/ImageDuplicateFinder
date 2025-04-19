@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.MessageBox;
 
 namespace ImageduplicatefinderUI
 {
@@ -29,46 +30,57 @@ namespace ImageduplicatefinderUI
 
       // Charger la taille et la position de la fenêtre
       if (Properties.Settings.Default.MainWindowWidth > 0)
-        this.Width = Properties.Settings.Default.MainWindowWidth;
+      {
+        Width = Properties.Settings.Default.MainWindowWidth;
+      }
+
       if (Properties.Settings.Default.MainWindowHeight > 0)
-        this.Height = Properties.Settings.Default.MainWindowHeight;
+      {
+        Height = Properties.Settings.Default.MainWindowHeight;
+      }
+
       if (Properties.Settings.Default.MainWindowTop >= 0)
-        this.Top = Properties.Settings.Default.MainWindowTop;
+      {
+        Top = Properties.Settings.Default.MainWindowTop;
+      }
+
       if (Properties.Settings.Default.MainWindowLeft >= 0)
-        this.Left = Properties.Settings.Default.MainWindowLeft;
+      {
+        Left = Properties.Settings.Default.MainWindowLeft;
+      }
 
       // Restaurer l'état de la fenêtre (normal ou maximisé)
       if (Properties.Settings.Default.MainWindowState == "Maximized")
-        this.WindowState = WindowState.Maximized;
+        WindowState = WindowState.Maximized;
       else
-        this.WindowState = WindowState.Normal;
+        WindowState = WindowState.Normal;
 
-      this.Closing += MainWindow_Closing;
+      Closing += MainWindow_Closing;
     }
 
     private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-{
-    // Sauvegarder l'état (normal, maximized, minimized)
-    Properties.Settings.Default.MainWindowState = this.WindowState.ToString();
-
-    // Si maximized, sauvegarder la taille/position de RestoreBounds
-    if (this.WindowState == WindowState.Maximized)
     {
-        Properties.Settings.Default.MainWindowWidth = this.RestoreBounds.Width;
-        Properties.Settings.Default.MainWindowHeight = this.RestoreBounds.Height;
-        Properties.Settings.Default.MainWindowTop = this.RestoreBounds.Top;
-        Properties.Settings.Default.MainWindowLeft = this.RestoreBounds.Left;
-    }
-    else
-    {
-        Properties.Settings.Default.MainWindowWidth = this.Width;
-        Properties.Settings.Default.MainWindowHeight = this.Height;
-        Properties.Settings.Default.MainWindowTop = this.Top;
-        Properties.Settings.Default.MainWindowLeft = this.Left;
-    }
+      // Sauvegarder l'état (normal, maximized, minimized)
+      Properties.Settings.Default.MainWindowState = WindowState.ToString();
 
-    Properties.Settings.Default.Save();
-}
+      // Si maximized, sauvegarder la taille/position de RestoreBounds
+      if (WindowState == WindowState.Maximized)
+      {
+        Properties.Settings.Default.MainWindowWidth = RestoreBounds.Width;
+        Properties.Settings.Default.MainWindowHeight = RestoreBounds.Height;
+        Properties.Settings.Default.MainWindowTop = RestoreBounds.Top;
+        Properties.Settings.Default.MainWindowLeft = RestoreBounds.Left;
+      }
+      else
+      {
+        Properties.Settings.Default.MainWindowWidth = Width;
+        Properties.Settings.Default.MainWindowHeight = Height;
+        Properties.Settings.Default.MainWindowTop = Top;
+        Properties.Settings.Default.MainWindowLeft = Left;
+      }
+
+      Properties.Settings.Default.Save();
+    }
 
     private void BtnSelectDirectory_Click(object sender, RoutedEventArgs e)
     {
@@ -84,7 +96,7 @@ namespace ImageduplicatefinderUI
     {
       if (string.IsNullOrEmpty(_selectedDirectory))
       {
-        System.Windows.MessageBox.Show("Veuillez sélectionner un répertoire", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show("Veuillez sélectionner un répertoire", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
 
@@ -115,12 +127,12 @@ namespace ImageduplicatefinderUI
 
         if (_duplicateGroups.Count == 0)
         {
-          System.Windows.MessageBox.Show("Aucune image en double n'a été trouvée.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+          MessageBox.Show("Aucune image en double n'a été trouvée.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
       }
       catch (Exception exception)
       {
-        System.Windows.MessageBox.Show($"Une erreur s'est produite : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        MessageBox.Show($"Une erreur s'est produite : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
       }
       finally
       {
@@ -148,7 +160,7 @@ namespace ImageduplicatefinderUI
         }
         catch (Exception exception)
         {
-          System.Windows.MessageBox.Show($"Impossible d'ouvrir l'image : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+          MessageBox.Show($"Impossible d'ouvrir l'image : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
         }
       }
     }
@@ -169,9 +181,9 @@ namespace ImageduplicatefinderUI
             {
               File.Delete(filePath);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-              System.Windows.MessageBox.Show($"Erreur lors de la suppression du fichier : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+              System.Windows.MessageBox.Show($"Erreur lors de la suppression du fichier : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
               return;
             }
 
@@ -193,9 +205,13 @@ namespace ImageduplicatefinderUI
               if (_duplicateGroups.Count > 0)
               {
                 if (currentIndex < _duplicateGroups.Count)
+                {
                   lstDuplicateGroups.SelectedIndex = currentIndex;
+                }
                 else
+                {
                   lstDuplicateGroups.SelectedIndex = _duplicateGroups.Count - 1;
+                }
               }
             }
           }
