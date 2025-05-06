@@ -127,11 +127,13 @@ namespace ImageduplicatefinderUI
 
         if (_duplicateGroups.Count == 0)
         {
+          pleaseWait.Close();
           MessageBox.Show("Aucune image en double n'a été trouvée.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
       }
       catch (Exception exception)
       {
+        pleaseWait.Close();
         MessageBox.Show($"Une erreur s'est produite : {exception.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
       }
       finally
