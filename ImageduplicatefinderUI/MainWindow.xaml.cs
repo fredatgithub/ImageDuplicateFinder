@@ -1,11 +1,9 @@
 ﻿using ImageduplicatefinderLib;
 using System;
 using System.Collections.ObjectModel;
-using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -58,15 +56,6 @@ namespace ImageduplicatefinderUI
         WindowState = WindowState.Normal;
 
       Closing += MainWindow_Closing;
-      // add version to title
-      Title += " - " + GetApplicationVersion();
-    }
-
-    private static string GetApplicationVersion()
-    {
-      Assembly assembly = Assembly.GetExecutingAssembly();
-      FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-      return $"V{fvi.FileMajorPart}.{fvi.FileMinorPart}.{fvi.FileBuildPart}.{fvi.FilePrivatePart}";
     }
 
     private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
