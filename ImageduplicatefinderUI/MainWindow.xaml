@@ -8,11 +8,17 @@
         Title="Recherche d'images en doublon" Height="600" Width="1000"
         Closing="MainWindow_Closing">
   <DockPanel LastChildFill="True" Margin="10">
-    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
-      <TextBox x:Name="txtDirectory" Width="400" Margin="0,0,10,0" IsReadOnly="True"/>
-      <Button x:Name="btnSelectDirectory" Content="Sélectionner un répertoire" Width="150" Click="BtnSelectDirectory_Click"/>
-      <Button x:Name="btnSearch" Content="Rechercher" Width="100" Margin="10,0,0,0" Click="BtnSearch_Click"/>
+<Grid DockPanel.Dock="Top" Margin="0,0,0,10">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+    <TextBox x:Name="txtDirectory" Width="400" Margin="0,0,10,0" IsReadOnly="True" Grid.Column="0"/>
+    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+        <Button x:Name="btnSelectDirectory" Content="Sélectionner un répertoire" Width="150" Click="BtnSelectDirectory_Click"/>
+        <Button x:Name="btnSearch" Content="Rechercher" Width="100" Margin="10,0,0,0" Click="BtnSearch_Click"/>
     </StackPanel>
+</Grid>
 
     <Grid>
       <Grid.ColumnDefinitions>
