@@ -20,3 +20,6 @@ The application uses the `System.Drawing.Image` class to load and compare images
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/fredatgithub/ImageDuplicateFinder/blob/master/LICENSE.txt) file for more information.
+
+![Here is an example:](
+https://github.com/fredatgithub/ImageDuplicateFinder?tab=readme-ov-file/blob/master/Example1.png)
