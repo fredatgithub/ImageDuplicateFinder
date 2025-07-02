@@ -193,28 +193,35 @@ namespace ImageduplicatefinderUI
             group.Images.Remove(imageToDelete);
             group.FileCount = group.Images.Count;
 
-            // Rafraîchir l'affichage
-            imgDuplicates.ItemsSource = null;
-            imgDuplicates.ItemsSource = group.Images;
-
             // Si le groupe n'a plus qu'une seule image, on supprime le groupe
             if (group.Images.Count == 1)
             {
               int currentIndex = _duplicateGroups.IndexOf(group);
               _duplicateGroups.Remove(group);
 
-              // Sélectionner le groupe suivant si possible, sinon le précédent
-              if (_duplicateGroups.Count > 0)
+              // Vérifier s'il reste des groupes
+              if (_duplicateGroups.Count == 0)
               {
-                if (currentIndex < _duplicateGroups.Count)
-                {
-                  lstDuplicateGroups.SelectedIndex = currentIndex;
-                }
-                else
-                {
-                  lstDuplicateGroups.SelectedIndex = _duplicateGroups.Count - 1;
-                }
+                // Plus de groupes, effacer la vue de droite
+                imgDuplicates.ItemsSource = null;
+                return;
               }
+
+              // Sélectionner le groupe suivant si possible, sinon le précédent
+              if (currentIndex < _duplicateGroups.Count)
+              {
+                lstDuplicateGroups.SelectedIndex = currentIndex;
+              }
+              else
+              {
+                lstDuplicateGroups.SelectedIndex = _duplicateGroups.Count - 1;
+              }
+            }
+            else
+            {
+              // Rafraîchir l'affichage du groupe actuel
+              imgDuplicates.ItemsSource = null;
+              imgDuplicates.ItemsSource = group.Images;
             }
           }
         }
