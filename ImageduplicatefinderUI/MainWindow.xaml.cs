@@ -22,6 +22,7 @@ namespace ImageduplicatefinderUI
     {
       InitializeComponent();
       _imageDuplicateFinder = new ImageDuplicateFinder();
+      WindowStartupLocation = WindowStartupLocation.CenterScreen;
       _duplicateGroups = new ObservableCollection<DuplicateGroup>();
       lstDuplicateGroups.ItemsSource = _duplicateGroups;
       // Charger le dernier chemin utilisé
