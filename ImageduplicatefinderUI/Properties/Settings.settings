@@ -20,5 +20,8 @@
     <Setting Name="LastDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\user1\OneDrive\Images</Value>
     </Setting>
+    <Setting Name="LastScreen" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

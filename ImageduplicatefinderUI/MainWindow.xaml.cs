@@ -12,17 +12,20 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace ImageduplicatefinderUI
 {
-  public partial class MainWindow : Window
+  public partial class MainWindow: Window
   {
     private string _selectedDirectory;
     private ObservableCollection<DuplicateGroup> _duplicateGroups;
     private readonly ImageDuplicateFinder _imageDuplicateFinder;
+    private readonly int screenCount = Screen.AllScreens.Length;
+
 
     public MainWindow()
     {
       InitializeComponent();
       _imageDuplicateFinder = new ImageDuplicateFinder();
       WindowStartupLocation = WindowStartupLocation.CenterScreen;
+      RestoreScreen();
       _duplicateGroups = new ObservableCollection<DuplicateGroup>();
       lstDuplicateGroups.ItemsSource = _duplicateGroups;
       // Charger le dernier chemin utilisé
@@ -81,7 +84,44 @@ namespace ImageduplicatefinderUI
       }
 
       Properties.Settings.Default.Save();
+      SaveScreen();
     }
+
+    private void SaveScreen()
+    {
+      var screen = Screen.AllScreens
+          .FirstOrDefault(s => s.WorkingArea.Contains(
+              new System.Drawing.Point(
+                  (int)this.Left + 10,
+                  (int)this.Top + 10)));
+
+      if (screen != null)
+      {
+        Properties.Settings.Default.LastScreen = screen.DeviceName;
+        Properties.Settings.Default.Save();
+      }
+    }
+
+    private void RestoreScreen()
+    {
+      string savedScreen = Properties.Settings.Default.LastScreen;
+
+      var screen = Screen.AllScreens
+          .FirstOrDefault(s => s.DeviceName == savedScreen);
+
+      if (screen != null)
+      {
+        WindowStartupLocation = WindowStartupLocation.Manual;
+        Left = screen.WorkingArea.Left + 50;
+        Top = screen.WorkingArea.Top + 50;
+      }
+      else
+      {
+        // Écran non trouvé → fallback
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
+      }
+    }
+
 
     private void BtnSelectDirectory_Click(object sender, RoutedEventArgs e)
     {
